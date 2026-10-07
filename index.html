@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wedding of Tania & Jefri</title>
+
+  <!-- Google Fonts Elegant -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Musik Latar (Langsung Terintegrasi) -->
+  <audio id="c:\Users\Administrator\Downloads\musik (2).mp3" loop preload="auto">
+    <source src="data:audio/mp3;base64,SUQ3BAAAAAAAI1RQRTEAAAAPAAAAU3VwZXJCYXNlQXVkaW8AVElUMQAAABAAAABXZWRkaW5nIE11c2ljAFRDT04AAAAFAAAAT3RoZXIAVEVOQwAAAA4AAABMYXZmNTguMjkuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAMBA0gAAAAACAAAAAAAAAAAAC..." type="audio/mpeg">
+  </audio>
+
+  <!-- Cover Layar Penuh -->
+  <div id="cover" class="cover-overlay">
+    <div class="cover-content">
+      <span class="royal-tag">THE WEDDING INVITATION</span>
+      <h1 class="cover-names">Tania & Jefri</h1>
+      <div class="gold-line"></div>
+      <p>Bapak/Ibu/Saudara/i yang terhormat, Anda diundang ke acara pernikahan kami.</p>
+      
+      <button class="btn-royal" onclick="openInvitation()">
+        <span>BUKA UNDANGAN</span> ✉️
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Music Button -->
+  <button id="music-btn" class="music-float" onclick="toggleMusic()">
+    <span id="music-icon">🎵</span>
+  </button>
+
+  <div class="royal-card">
+    <div class="card-border"></div>
+
+    <header class="header">
+      <span class="sub-title">THE WEDDING OF</span>
+      <h1 class="couple-title">Tania & Jefri</h1>
+      <p class="concept-tag">Konsep: Elegant Royal Gold</p>
+    </header>
+
+    <!-- Mempelai Section -->
+    <section class="couples">
+      <div class="profile">
+        <div class="frame-gold">
+          <!-- Foto Tania (Direct Base64) -->
+          <img src="c:\Users\Administrator\Downloads\tania.jpeg-" alt="Tania Nuraini">
+        </div>
+        <h2>Tania Nuraini</h2>
+        <p>Aktris & Model</p>
+      </div>
+
+      <div class="divider">&</div>
+
+      <div class="profile">
+        <div class="frame-gold">
+          <!-- Foto Jefri (Direct Base64) -->
+          <img src="c:\Users\Administrator\Downloads\jefri.jpg" alt="Jefri Nichol">
+        </div>
+        <h2>Jefri Nichol</h2>
+        <p>Aktor</p>
+      </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="countdown-wrapper">
+      <h3>MENUNGGU HARI BAHAGIA</h3>
+      <div class="timer">
+        <div class="time-box"><span id="days">00</span><p>HARI</p></div>
+        <div class="time-box"><span id="hours">00</span><p>JAM</p></div>
+        <div class="time-box"><span id="mins">00</span><p>MENIT</p></div>
+        <div class="time-box"><span id="secs">00</span><p>DETIK</p></div>
+      </div>
+    </section>
+
+    <!-- Detail Acara -->
+    <section class="event-details">
+      <h3>DETAIL ACARA</h3>
+      <div class="gold-box">
+        <h4>Akad Nikah & Resepsi</h4>
+        <div class="info-item">
+          <strong>Hari / Tanggal:</strong> Sabtu, 20 Desember 2026
+        </div>
+        <div class="info-item">
+          <strong>Waktu:</strong> 16.00 WIB - Selesai
+        </div>
+        <div class="info-item">
+          <strong>Lokasi:</strong> Grand Ballroom Hotel Mulia, Jakarta
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+    </footer>
+  </div>
+
+  <script>
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('music-btn');
+    const icon = document.getElementById('music-icon');
+
+    function openInvitation() {
+      document.getElementById('cover').classList.add('hide');
+      music.play().then(() => {
+        btn.classList.add('playing');
+        icon.innerText = '⏸️';
+      }).catch(err => console.log("Autoplay blocked:", err));
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        btn.classList.add('playing');
+        icon.innerText = '⏸️';
+      } else {
+        music.pause();
+        btn.classList.remove('playing');
+        icon.innerText = '🎵';
+      }
+    }
+
+    const eventDate = new Date("Dec 20, 2026 16:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = eventDate - now;
+
+      if (diff > 0) {
+        document.getElementById('days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        document.getElementById('hours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        document.getElementById('mins').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        document.getElementById('secs').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
